@@ -7,11 +7,14 @@ const Home: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Container maxWidth="sm" className="mt-10 bg-black text-white min-h-screen flex flex-col items-center justify-center">
+    <Container maxWidth="sm" className="mt-10 bg-black text-white min-h-screen flex flex-col items-center justify-center px-4">
       {/* Page Title with Lock Icon */}
-      <Typography variant="h4" component="h3" gutterBottom className="text-white flex items-center animate-fade-in text-center" style={{ fontFamily: 'Fira Code, monospace' }}>
-        <LockIcon className="mr-2" /> Password Generator
-      </Typography>
+      <Box display="flex" alignItems="center" justifyContent="center" className="animate-fade-in text-center mb-6">
+        <LockIcon className="mr-2" />
+        <Typography variant="h4" component="h3" className="text-white" style={{ fontFamily: 'Fira Code, monospace' }}>
+          Password Generator
+        </Typography>
+      </Box>
       {/* Password Generator Component */}
       <PasswordGenerator />
       {/* Footer */}
