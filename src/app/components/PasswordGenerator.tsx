@@ -1,9 +1,12 @@
 "use client";
 
 import React, { useState } from 'react';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { TextField, Button, Box, Typography, Collapse } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import SettingsIcon from '@mui/icons-material/Settings';
+import KeyIcon from '@mui/icons-material/Key';
 import PasswordOptions from './PasswordOptions';
+import AdvancedPasswordOptions from './AdvancedPasswordOptions';
 import PasswordStrengthBar from './PasswordStrengthBar';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -20,6 +23,7 @@ const PasswordGenerator: React.FC = () => {
   const [lengthError, setLengthError] = useState<string>('');
   const [criteriaError, setCriteriaError] = useState<string>('');
   const [passwordStrength, setPasswordStrength] = useState<string>('');
+  const [showAdvancedOptions, setShowAdvancedOptions] = useState<boolean>(false);
 
   /**
    * Generates a random password based on user settings.
@@ -156,24 +160,38 @@ const PasswordGenerator: React.FC = () => {
         includeUppercase={includeUppercase}
         includeNumbers={includeNumbers}
         includeSymbols={includeSymbols}
-        excludeSimilarCharacters={excludeSimilarCharacters}
-        excludeAmbiguousCharacters={excludeAmbiguousCharacters}
-        includeHexadecimal={includeHexadecimal}
         onToggleLowercase={() => setIncludeLowercase(!includeLowercase)}
         onToggleUppercase={() => setIncludeUppercase(!includeUppercase)}
         onToggleNumbers={() => setIncludeNumbers(!includeNumbers)}
         onToggleSymbols={() => setIncludeSymbols(!includeSymbols)}
-        onToggleSimilarCharacters={() => setExcludeSimilarCharacters(!excludeSimilarCharacters)}
-        onToggleAmbiguousCharacters={() => setExcludeAmbiguousCharacters(!excludeAmbiguousCharacters)}
-        onToggleHexadecimal={() => setIncludeHexadecimal(!includeHexadecimal)}
       />
       <Button
         variant="contained"
-        color="primary"
+        onClick={() => setShowAdvancedOptions(!showAdvancedOptions)}
+        fullWidth
+        className="mt-4 bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105"
+        style={{ fontFamily: 'Fira Code, monospace', fontWeight: '600' }}
+        startIcon={<SettingsIcon />}
+      >
+        Advanced Settings
+      </Button>
+      <Collapse in={showAdvancedOptions}>
+        <AdvancedPasswordOptions
+          excludeSimilarCharacters={excludeSimilarCharacters}
+          excludeAmbiguousCharacters={excludeAmbiguousCharacters}
+          includeHexadecimal={includeHexadecimal}
+          onToggleSimilarCharacters={() => setExcludeSimilarCharacters(!excludeSimilarCharacters)}
+          onToggleAmbiguousCharacters={() => setExcludeAmbiguousCharacters(!excludeAmbiguousCharacters)}
+          onToggleHexadecimal={() => setIncludeHexadecimal(!includeHexadecimal)}
+        />
+      </Collapse>
+      <Button
+        variant="contained"
         onClick={generatePassword}
         fullWidth
         className="mt-4 bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105"
         style={{ fontFamily: 'Fira Code, monospace', fontWeight: '600' }}
+        startIcon={<KeyIcon />}
       >
         Generate Password
       </Button>
