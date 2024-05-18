@@ -5,7 +5,7 @@ import "./css/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Password Generator",
+  title: "Password Generator | Gallardo",
   description: "Password Generator by Roberto Gallardo",
 };
 

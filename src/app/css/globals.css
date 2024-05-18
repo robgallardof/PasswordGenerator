@@ -14,31 +14,31 @@
 /* Global styles for body */
 body {
   color: rgb(var(--foreground-rgb));
-  background: #0F0F0F; /* Black background */
+  background: #0F0F0F; 
   font-family: 'Fira Code', monospace;
 }
 
 /* Custom styles for TextField */
 .my-4 .MuiInputBase-input {
-  color: #ffffff !important; /* White text in TextField */
-  font-family: 'Fira Code', monospace !important; /* Apply Fira Code font */
+  color: #ffffff !important; 
+  font-family: 'Fira Code', monospace !important; 
 }
 
 .my-4 .MuiFormLabel-root {
-  color: #ffffff !important; /* White label in TextField */
-  font-family: 'Fira Code', monospace !important; /* Apply Fira Code font */
+  color: #ffffff !important; 
+  font-family: 'Fira Code', monospace !important; 
 }
 
 .my-4 .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-  border-color: #ffffff !important; /* White border in TextField */
+  border-color: #ffffff !important; 
 }
 
 .my-4 .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-  border-color: #1DB954 !important; /* Green border on hover */
+  border-color: #1DB954 !important; 
 }
 
 .my-4 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: #1DB954 !important; /* Green border when focused */
+  border-color: #1DB954 !important;
 }
 
 /* Animation for TextField */
@@ -52,34 +52,34 @@ body {
 /* General text color */
 .text-white {
   color: #ffffff !important;
-  font-family: 'Fira Code', monospace !important; /* Apply Fira Code font */
+  font-family: 'Fira Code', monospace !important; 
 }
 
 /* Custom button styles */
 .bg-green-600 {
-  background-color: #1DB954 !important; /* Spotify green */
+  background-color: #1DB954 !important; 
 }
 
 .bg-green-500:hover {
-  background-color: #1ED760 !important; /* Lighter green on hover */
+  background-color: #1ED760 !important; 
 }
 
 /* Custom background color */
 .bg-black {
-  background-color: #0F0F0F !important; /* Black background */
+  background-color: #0F0F0F !important; 
 }
 
 /* Custom switch styles */
 .MuiSwitch-track {
-  background-color: #ffffff !important; /* White track when Switch is off */
+  background-color: #ffffff !important; 
 }
 
 .MuiSwitch-switchBase.Mui-checked {
-  color: #1DB954 !important; /* Green color when Switch is on */
+  color: #1DB954 !important; 
 }
 
 .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
-  background-color: #1DB954 !important; /* Green track when Switch is on */
+  background-color: #1DB954 !important; 
 }
 
 /* Fade-in animation */
