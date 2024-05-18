@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControlLabel, Switch, Box } from '@mui/material';
-import { IPasswordOptionsProps } from '../interfaces/PasswordOptions';
+import { IPasswordOptionsProps } from '../interfaces/IPasswordOptions';
 
 const PasswordOptions: React.FC<IPasswordOptionsProps> = ({
   includeLowercase,

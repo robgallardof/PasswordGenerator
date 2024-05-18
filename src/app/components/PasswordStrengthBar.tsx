@@ -10,14 +10,14 @@ const PasswordStrengthBar: React.FC<PasswordStrengthBarProps> = ({ strength }) =
     if (strength === 'Weak') return 'red';
     if (strength === 'Medium') return 'orange';
     if (strength === 'Strong') return 'yellow';
-    return 'green'; // Very Strong
+    return 'green'; 
   };
 
   const getProgressValue = () => {
     if (strength === 'Weak') return 25;
     if (strength === 'Medium') return 50;
     if (strength === 'Strong') return 75;
-    return 100; // Very Strong
+    return 100; 
   };
 
   return (

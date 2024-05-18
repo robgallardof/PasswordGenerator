@@ -8,7 +8,7 @@ import PasswordStrengthBar from './PasswordStrengthBar';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const PasswordGenerator: React.FC = () => {
-  const [length, setLength] = useState<number>(16);
+  const [length, setLength] = useState<number>(22);
   const [includeLowercase, setIncludeLowercase] = useState<boolean>(true);
   const [includeUppercase, setIncludeUppercase] = useState<boolean>(true);
   const [includeNumbers, setIncludeNumbers] = useState<boolean>(true);
@@ -18,6 +18,7 @@ const PasswordGenerator: React.FC = () => {
   const [includeHexadecimal, setIncludeHexadecimal] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
   const [lengthError, setLengthError] = useState<string>('');
+  const [criteriaError, setCriteriaError] = useState<string>('');
   const [passwordStrength, setPasswordStrength] = useState<string>('');
 
   /**
@@ -28,6 +29,13 @@ const PasswordGenerator: React.FC = () => {
       setLengthError('Length must be greater than 0');
       return;
     }
+
+    if (!includeLowercase && !includeUppercase && !includeNumbers && !includeSymbols && !includeHexadecimal) {
+      setCriteriaError('At least one criteria must be selected');
+      return;
+    }
+
+    setCriteriaError('');
 
     let lowerCaseChars = 'abcdefghijklmnopqrstuvwxyz';
     let upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -81,21 +89,35 @@ const PasswordGenerator: React.FC = () => {
   const evaluatePasswordStrength = (password: string) => {
     let strengthPoints = 0;
 
-    if (password.length >= 16) strengthPoints += 2;
-    if (includeLowercase) strengthPoints += 1;
-    if (includeUppercase) strengthPoints += 1;
-    if (includeNumbers) strengthPoints += 1;
-    if (includeSymbols) strengthPoints += 1;
-    if (excludeSimilarCharacters) strengthPoints -= 1;
-    if (excludeAmbiguousCharacters) strengthPoints -= 1;
-    if (includeHexadecimal) strengthPoints += 1;
+    if (password.length < 6) {
+      strengthPoints = 0;
+    } else {
+      if (password.length >= 17) {
+        strengthPoints += 3;
+      } else if (password.length >= 8) {
+        strengthPoints += 2;
+      }
+
+      if (includeLowercase && includeUppercase && includeNumbers) {
+        strengthPoints += 3;
+      } else if ((includeLowercase && includeUppercase) || (includeLowercase && includeNumbers) || (includeUppercase && includeNumbers)) {
+        strengthPoints += 2;
+      } else {
+        strengthPoints += 1;
+      }
+
+      if (includeSymbols) strengthPoints += 1;
+      if (excludeSimilarCharacters) strengthPoints -= 1;
+      if (excludeAmbiguousCharacters) strengthPoints -= 1;
+      if (includeHexadecimal) strengthPoints += 1;
+    }
 
     let strength = '';
-    if (strengthPoints >= 6) {
+    if (strengthPoints >= 7) {
       strength = 'Very Strong';
-    } else if (strengthPoints >= 4) {
+    } else if (strengthPoints >= 5) {
       strength = 'Strong';
-    } else if (strengthPoints >= 2) {
+    } else if (strengthPoints >= 3) {
       strength = 'Medium';
     } else {
       strength = 'Weak';
@@ -124,6 +146,11 @@ const PasswordGenerator: React.FC = () => {
           style: { color: '#ffffff', fontFamily: 'Fira Code, monospace' }
         }}
       />
+      {criteriaError && (
+        <Typography variant="body2" className="text-red-500" style={{ fontFamily: 'Fira Code, monospace' }}>
+          {criteriaError}
+        </Typography>
+      )}
       <PasswordOptions
         includeLowercase={includeLowercase}
         includeUppercase={includeUppercase}
